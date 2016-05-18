@@ -1,0 +1,27 @@
+{
+  "query": {
+      "filtered": {
+            "query": {
+	            "query_string": {
+		              "query": "message:cmdlog AND ( message:avcstat OR message:audit2allow OR message:audit2why OR message:chcon OR message:checkpolicy OR message:fixfiles OR message:genhomedircon OR message:getsebool OR message:getenforce OR message:matchpathcon OR message:newrole OR message:restorecon OR message:run_init OR message:selinuxenabled OR message:sestatus OR message:setfiles OR message:setsebool OR message:setenforce OR message:passwd OR message:visudo OR message:/etc/passwd OR message:/etc/shadow OR message:/etc/group OR message:useradd OR message:userdel OR message:groupadd OR message:gpasswd OR message:smbpasswd OR message:iptables OR message:firewalld OR message:firewall-cmd OR message:audit.log )",
+		              "allow_leading_wildcard": false
+		            }
+	          },
+            "filter": {
+	            "bool": {
+		              "must": {
+			                  "range": {
+					                "timestamp": {
+							                "from": "1970-01-01 00:00:00.000",
+							                "to": "2015-12-13 23:56:00.514",
+							                "include_lower": true,
+							                "include_upper": true
+							              }
+					              }
+			                }
+		            }
+	          }
+          }
+    }
+}
+

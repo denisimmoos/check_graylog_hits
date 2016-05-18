@@ -1,0 +1,28 @@
+{
+  "from": 0,
+  "size": 100,
+  "query": {
+      "filtered": {
+            "query": {
+	            "query_string": {
+		              "query": "DEFAULT",
+		              "allow_leading_wildcard": false
+		            }
+	          },
+            "filter": {
+	            "bool": {
+		              "must": {
+			                  "range": {
+					                "timestamp": {
+							                "from": "DEFAULT",
+							                "to": "DEFAULT",
+							                "include_lower": true,
+							                "include_upper": true
+							              }
+					              }
+			                }
+		            }
+	          }
+          }
+    }
+}
