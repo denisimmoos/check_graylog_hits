@@ -13,7 +13,6 @@
 #        NOTES: ---
 #       AUTHOR: Denis Immoos (<denisimmoos@gmail.com>)
 #    AUTHORREF: Senior Linux System Administrator (LPIC3)
-# ORGANIZATION: Sopra Steria Switzerland
 #      VERSION: 1.0
 #      CREATED: 11/20/2015 03:21:31 PM
 #     REVISION: ---
