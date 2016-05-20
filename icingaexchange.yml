@@ -1,0 +1,18 @@
+name: check_graylog_hits
+description: "file:///README.md"
+url: "https://github.com/denisimmoos/check_graylog_hits"
+tags: Statistic
+vendor: Linux
+target: Operating System
+type: Plugin
+license: gplv3
+releases: 
+  - 
+    name: 1.0
+    description: "1.0 Release"
+    files: 
+      - 
+        name: check_graylog_hits.pl
+        url: "file:///check_graylog_hits.pl"
+        description: "First release"
+        checksum: 290e9c33cae777b28b3ee6369bd7cf22
