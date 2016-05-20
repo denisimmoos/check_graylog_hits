@@ -6,3 +6,7 @@ A icinga/nagios check script which helps to detect patterns/hits on the graylog 
 
 https://github.com/denisimmoos/check_graylog_hits/wiki
 
+# Download 
+
+https://github.com/denisimmoos/check_graylog_hits 
+
