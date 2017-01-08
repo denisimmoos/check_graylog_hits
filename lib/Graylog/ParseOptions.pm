@@ -72,7 +72,7 @@ sub parse {
 	&error($caller,'$Options{critical} must be defined') if not ( $Options{'C'} or $Options{'critical'} ); 
 
 	# gt
-	&error($caller,'$Options{critical} must be greater than $Options{warning}') if ( $Options{'warning'} ge $Options{'critical'} ); 
+	&error($caller,'$Options{critical} must be greater than $Options{warning}') if ( $Options{'warning'} > $Options{'critical'} ); 
 
     # 
 	# hostname
