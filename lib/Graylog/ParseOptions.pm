@@ -10,8 +10,9 @@ package Graylog::ParseOptions;
 #        FILES: ---
 #         BUGS: ---
 #        NOTES: ---
-#       AUTHOR: Denis Immoos (<denisimmoos@gmail.com>)
+#       AUTHOR: Denis Immoos (<denis.immoos@soprasteria.com>)
 #    AUTHORREF: Senior Linux System Administrator (LPIC3)
+# ORGANIZATION: Sopra Steria Switzerland
 #      VERSION: 1.0
 #      CREATED: 11/22/2015 03:11:47 PM
 #     REVISION: ---
@@ -74,7 +75,7 @@ sub parse {
 	# gt
 	&error($caller,'$Options{critical} must be greater than $Options{warning}') if ( $Options{'warning'} > $Options{'critical'} ); 
 
-    # 
+    	# 
 	# hostname
 	#
 	&error($caller,'$Options{hostname} must be defined') if not ( $Options{'H'} or $Options{'hostname'} ); 
@@ -120,7 +121,7 @@ This is released under the GPL3.
 
 =head1 AUTHOR
 
-Denis Immoos - <denisimmoos@gmail.com>,
+Denis Immoos - <denis.immoos@soprasteria.com>,
 Senior Linux System Administrator (LPIC3)
 
 =cut
