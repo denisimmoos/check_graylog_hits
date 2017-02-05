@@ -32,14 +32,18 @@ use lib '/opt/contrib/plugins/check_graylog_hits/lib';
 #===============================================================================
 
 my %Options = ();
-#$Options{'graylog_ip'} = '10.122.36.123'; # bos-mon01
+$Options{'graylog_ip_2'} = '10.122.36.123'; # bos-mon01
 $Options{'graylog_ip'} = '10.122.36.120';  # bos-mon02
-$Options{'graylog_api_port'} = '9200';  # bos-mon02
+$Options{'graylog_api_port'} = '9200';  # bos-mon01
+$Options{'graylog_api_port_2'} = '9200';  # bos-mon02
 
 $Options{'uri'} = 'http://' . $Options{'graylog_ip'} . ':' . $Options{'graylog_api_port'} . '/_search?filter_path=hits.total';
 
-$Options{'graylog_web_ip'} = '10.122.23.112';  # bos-mon02
+$Options{'graylog_web_ip'} = '10.122.23.112';  # bos-mon01
 $Options{'graylog_web_port'} = '9000';
+
+$Options{'graylog_web_ip_2'} = '10.122.23.113';  # bos-mon02
+$Options{'graylog_web_port_2'} = '9000';
 
 $Options{'lwp_timeout'} = 10;
 $Options{'print-options'} = 0;
@@ -110,6 +114,21 @@ load $ParseOptions;
 $ParseOptions = $ParseOptions->new();
 %Options = $ParseOptions->parse(\%Options);
 
+
+#===============================================================================
+# IF I ASK FOR MY BACKUP
+#===============================================================================
+
+if ( $Options{'hostname'} eq $Options{'graylog_ip'} ) {
+
+	$Options{'graylog_ip'} = $Options{'graylog_ip_2'};
+	$Options{'graylog_api_port'} = $Options{'graylog_api_port_2'};
+	$Options{'uri'} = 'http://' . $Options{'graylog_ip'} . ':' . $Options{'graylog_api_port'} . '/_search?filter_path=hits.total';
+	$Options{'graylog_web_ip'} = $Options{'graylog_web_ip_2'};
+        $Options{'graylog_web_port'} = $Options{'graylog_web_port_2'};
+}
+
+
 #===============================================================================
 # Datetime
 #===============================================================================
@@ -146,6 +165,7 @@ my $req = HTTP::Request->new( 'POST', $Options{'uri'} );
 my $req_default = HTTP::Request->new( 'POST', $Options{'uri'} ); 
 $req->header( 'Content-Type' => 'application/json' ); 
 $req_default->header( 'Content-Type' => 'application/json' ); 
+
 
 #===============================================================================
 # JSON
@@ -338,13 +358,24 @@ if ($Options{'print-options'} == 1 ) {
 	# greate search url
 	$Options{'query'} =~ s/\:/%3A/g;
 	$Options{'query'} =~ s/\s/+/g;
+	# 2017-02-05T18%3A28%3A34.000Z
+	$dt_from =~ s/\:/%3A/g;
+	$dt_from =~ s/\s/T/g;
+	$dt_to =~ s/\:/%3A/g;
+	$dt_to=~ s/\s/T/g;
         $Options{'graylog_web_uri'} = 	'http://' . 
 					$Options{'graylog_web_ip'} .  
 					':' .
 					$Options{'graylog_web_port'} . 
-					'/search?rangetype=relative&fields=message%2Csource&highlightMessage=&relative=' .
-                                      	$Options{'minutes'}*60 . '&q=';
+                                        '/search?rangetype=absolute&fields=message%2Csource&from=' .
+					$dt_from . '00Z' .
+					'&to=' .
+					$dt_to . '00Z' . 
+					'&q=';
+					#'/search?rangetype=relative&fields=message%2Csource&highlightMessage=&relative=' .
+					
         $Options{'graylog_web_uri'} .= $Options{'query'}; 
+
                                       
 	print "QUERY_URL:\n\n$Options{'graylog_web_uri'}" . "\n\n";
 
